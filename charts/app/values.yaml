@@ -1,0 +1,10 @@
+backend:
+  image: "ashmehroz1/gitops-demo-backend:latest"
+  port: 8080
+
+frontend:
+  image: "ashmehroz1/gitops-demo-frontend:latest"
+  port: 8080
+  backendUrl: "http://backend.default.svc.cluster.local:8080"
+
+replicaCount: 1
