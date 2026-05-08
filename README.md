@@ -106,7 +106,7 @@ Open:
 ```bash
 ## You have run these commands in your root directory :--> gitops-k3s-demo-manifests-
 export KUBECONFIG="../gitops-k3s-demo-infra/infra/kubeconfig.yaml"
-kubectl port-forward svc/argocd-server -n argocd 8080:443
+kubectl port-forward svc/argocd-server -n argocd 8081:443
 ```
 
 Open:
