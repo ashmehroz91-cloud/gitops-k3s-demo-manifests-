@@ -15,8 +15,21 @@ spec:
       containers:
         - name: frontend
           image: {{ .Values.frontend.image }}
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: {{ .Values.frontend.port }}
           env:
             - name: BACKEND_URL
               value: "{{ .Values.frontend.backendUrl }}"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.frontend.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.frontend.port }}
+            initialDelaySeconds: 20
+            periodSeconds: 10

@@ -15,5 +15,18 @@ spec:
       containers:
         - name: backend
           image: {{ .Values.backend.image }}
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: {{ .Values.backend.port }}
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.backend.port }}
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.backend.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 10
