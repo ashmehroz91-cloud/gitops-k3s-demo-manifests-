@@ -103,26 +103,32 @@ Open:
 
 ## Access ArgoCD
 
+
+
+```bash
+## You have run these commands in your root directory :--> gitops-k3s-demo-manifests-
+export KUBECONFIG="../gitops-k3s-demo-infra/infra/kubeconfig.yaml"
+
+## Below command is to get password for argocd dashboard 
+kubectl --kubeconfig="$KUBECONFIG" -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo 
+```
+Username: `admin`
+
+
 ```bash
 ## You have run these commands in your root directory :--> gitops-k3s-demo-manifests-
 export KUBECONFIG="../gitops-k3s-demo-infra/infra/kubeconfig.yaml"
 kubectl port-forward svc/argocd-server -n argocd 8081:443
-```
 
 Open:
 
 - `https://localhost:8081`
 
-Get the password: Yu5bdm2v8Dqubgwi 
-OR
+Note: You must have to add your repo link into argocd application that you want to monitor through argocd 
 
-```bash
-## You have run these commands in your root directory :--> gitops-k3s-demo-manifests-
-export KUBECONFIG="../gitops-k3s-demo-infra/infra/kubeconfig.yaml"
-kubectl --kubeconfig="$KUBECONFIG" -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
-```
 
-Username: `admin`
+
+Stop and Destroy steps of application
 
 ## Stop the app
 
@@ -162,3 +168,11 @@ kubectl --kubeconfig="$KUBECONFIG" -n argocd get pods
 - The Helm chart uses the images defined in `charts/app/values.yaml`.
 - If the client loads images locally into k3s, make sure the image tags in the values file match.
 - If you are not on Linux, use WSL2 or a Linux VM for the deploy and smoke-test scripts.
+
+
+## Destroy
+##
+```bash
+## You have run these commands in your root directory :--> gitops-k3s-demo-infra
+./scripts/down.sh
+```
