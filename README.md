@@ -22,26 +22,7 @@ The client clones this repo to deploy the app onto the k3s cluster created by th
 
 The deployment commands are Bash-based and require access to the kubeconfig created by the infra repo. The kubeconfig should live inside the Linux VM workflow.
 
-## Prerequisites and installation commands
 
-- Git (check first: `git --version`)
-- kubectl (check first: `kubectl version --client`)
-- Helm 3 (check first: `helm version`)
-
-```bash
-sudo apt update
-sudo apt install -y git curl ca-certificates
-
-# kubectl
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-rm kubectl
-kubectl version --client
-
-# Helm
-curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-helm version
-```
 
 Use the Linux VM for `kubectl`, `helm`, and `KUBECONFIG`-based deploy commands.
 
@@ -74,17 +55,10 @@ export KUBECONFIG="../gitops-k3s-demo-infra/infra/kubeconfig.yaml"
 ```bash
 ## You have run these commands in your root directory :--> gitops-k3s-demo-manifests-
 export KUBECONFIG="../gitops-k3s-demo-infra/infra/kubeconfig.yaml"
-export REPO_URL="https://github.com/YOUR_USER/gitops-k3s-demo-manifests-"
+export REPO_URL="https://github.com/ashmehroz91-cloud/gitops-k3s-demo-manifests-"
 ./scripts/bootstrap-argocd-app.sh
 ```
 
-## Smoke test
-
-```bash
-## You have run these commands in your root directory :--> gitops-k3s-demo-manifests-
-export KUBECONFIG="../gitops-k3s-demo-infra/infra/kubeconfig.yaml"
-./scripts/smoke-test.sh
-```
 
 Expected output:
 - `The backend is up`
